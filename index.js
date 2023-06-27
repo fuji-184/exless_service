@@ -17,7 +17,7 @@ app.use(router);
 
 const clientId = '477300062240-65gfhg05t4ppgfdgnk90tuvr8tff1hhg.apps.googleusercontent.com';
 const clientSecret = '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';
-const redirectUri = 'http://localhost:3000/oauth2callback';
+const redirectUri = 'https://exless-fujisantoso134.b4a.run/oauth2callback';
 
 const oauth2Client = new OAuth2Client({
   clientId: clientId,
@@ -47,10 +47,10 @@ app.get('/oauth2callback', async (req, res) => {
     refreshToken = tokens.refresh_token;
     oauth2Client.setCredentials(tokens);
     
-    res.redirect('http://localhost:5173/add/video');
+    res.redirect('https://exless-official.vercel.app/add/video');
   } catch (error) {
     console.error('Gagal mendapatkan token akses:', error);
-    res.redirect('http://localhost:5173/yt');
+    res.redirect('https://exless-official.vercel.app/data/video');
   }
 });
 

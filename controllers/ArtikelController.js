@@ -26,6 +26,25 @@ const getOne = (req, res) => {
   
 }
 
+const getOneByTitle = (req, res) => {
+ 
+  const { judul } = req.params;
+
+  const dbRef = fdb.ref('/Artikel');
+
+  dbRef
+    .orderByChild('judul')
+    .equalTo(judul)
+    .once('value')
+    .then((snapshot) => {
+      res.json(snapshot);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
+};
+
+
 const add = async (req, res) => {
   
   const { judul, konten, thumbnail } = req.body
@@ -72,6 +91,7 @@ const remove = async (req, res) => {
 module.exports = {
   getAll,
   getOne,
+  getOneByTitle,
   add,
   update,
   remove

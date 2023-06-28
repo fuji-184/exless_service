@@ -4,8 +4,13 @@ const getAll = (req, res) => {
   const dbRef = fdb.ref('/Community');
   
   dbRef.once('value', (snapshot) => {
-    // const data = snapshot.val();
-    res.json(snapshot);
+     //const data = snapshot.val();
+    //res.json(data);
+     if (snapshot.exists()) {
+       res.json('ada data')
+     } else {
+       res.json('tidak ada data')
+     }
   });
   
 }

@@ -47,11 +47,11 @@ const getOneByTitle = (req, res) => {
 
 const add = async (req, res) => {
   
-  const { judul, konten, thumbnail } = req.body
+  const { judul, konten, thumbnail, ringkasan } = req.body
   
   try {
     const newRef = fdb.ref('/Artikel');
-    await newRef.push().set({ thumbnail, judul, konten });
+    await newRef.push().set({ thumbnail, judul, konten, ringkasan });
     res.json('Artikel berhasil dibuat!')
   } catch (err){
     res.json(err)

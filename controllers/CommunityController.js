@@ -5,12 +5,13 @@ const getAll = (req, res) => {
   
   dbRef.once('value', (snapshot) => {
      //const data = snapshot.val();
-    //res.json(data);
-     if (snapshot.exists()) {
+    res.json(snapshot);
+   /*  if (snapshot.exists()) {
        res.json('ada data')
      } else {
        res.json('tidak ada data')
      }
+   */
   });
   
 }

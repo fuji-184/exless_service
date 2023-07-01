@@ -42,21 +42,16 @@ app.get('/oauth2callback', async (req, res) => {
   const { code } = req.query;
 
   try {
-    if (!code) {
-      throw new Error('Failed to obtain code');
-    }
-
+    
     const { tokens } = await oauth2Client.getToken(code);
-    if (!tokens) {
-      throw new Error('Failed to obtain access token');
-    }
+    
     accessToken = tokens.access_token;
     refreshToken = tokens.refresh_token;
     oauth2Client.setCredentials(tokens);
     
     res.redirect('https://exless-official.vercel.app/add/video');
   } catch (error) {
-    console.error('Gagal mendapatkan token akses:', error);
+    
     res.redirect('https://exless-official.vercel.app/data/video');
   }
 });
@@ -116,7 +111,7 @@ app.post('/video', upload.single('video'), async (req, res) => {
     }
     
   } catch (error) {
-    console.error('Error uploading video:', error);
+    
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

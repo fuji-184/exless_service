@@ -42,7 +42,14 @@ app.get('/oauth2callback', async (req, res) => {
   const { code } = req.query;
 
   try {
+    if (!code) {
+      throw new Error('Failed to obtain code');
+    }
+
     const { tokens } = await oauth2Client.getToken(code);
+    if (!tokens) {
+      throw new Error('Failed to obtain access token');
+    }
     accessToken = tokens.access_token;
     refreshToken = tokens.refresh_token;
     oauth2Client.setCredentials(tokens);

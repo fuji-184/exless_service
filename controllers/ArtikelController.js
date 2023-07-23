@@ -48,10 +48,10 @@ const getOneByTitle = (req, res) => {
 const add = async (req, res) => {
   
   const { title, description, imageUrl } = req.body
-  const newsUrl = 'https://exless-official.vercel.app/' + title
+  // const newsUrl = 'https://exless-official.vercel.app/' + title 
   try {
     const newRef = fdb.ref('/Berita');
-    await newRef.push().set({ imageUrl, title, description, newsUrl });
+    await newRef.push().set({ imageUrl, title, description, });
     res.json('Berita berhasil dibuat!')
   } catch (err){
     res.json(err)

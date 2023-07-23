@@ -46,18 +46,25 @@ const getOneByTitle = (req, res) => {
 
 
 const add = async (req, res) => {
+  const { title, description, imageUrl, newsUrl,content } = req.body;
   
-  const { title, description, imageUrl } = req.body
-  // const newsUrl = 'https://exless-official.vercel.app/' + title 
+/*  if (newsUrl){
+    res.json(newsUrl)
+    return true
+  }
+  else {
+    res.json("Title Gagal Diterima")
+    return false
+  }
+*/  
   try {
     const newRef = fdb.ref('/Berita');
-    await newRef.push().set({ imageUrl, title, description, });
-    res.json('Berita berhasil dibuat!')
-  } catch (err){
-    res.json(err)
+    await newRef.push().set({ imageUrl, title, description, newsUrl,content });
+    res.json('Berita berhasil dibuat!');
+  } catch (err) {
+    res.json(err);
   }
-  
-}
+};
 
 const update = async (req, res) => {
   

@@ -74,7 +74,7 @@ router.post('/artikel', ArtikelController.add);
 
 router.put('/artikel/:id', ArtikelController.update);
 
-router.get('/:judul', ArtikelController.getOneByTitle);
+router.get('/:title', ArtikelController.getOneByTitle);
 
 router.delete('/artikel/:id', ArtikelController.remove);
 

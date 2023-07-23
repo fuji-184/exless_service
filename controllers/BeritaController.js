@@ -1,7 +1,7 @@
 const { fdb } = require('../config/fdb');
 
 const getAll = (req, res) => {
-  const dbRef = fdb.ref('/Artikel');
+  const dbRef = fdb.ref('/Berita');
   
   dbRef.once('value', (snapshot) => {
 
@@ -14,7 +14,7 @@ const getOne = (req, res) => {
   
   const { id } = req.params;
   
-  const dbRef = fdb.ref('/Artikel/' + id);
+  const dbRef = fdb.ref('/Berita/' + id);
 
   dbRef.once('value')
     .then((snapshot) => {
@@ -28,13 +28,13 @@ const getOne = (req, res) => {
 
 const getOneByTitle = (req, res) => {
  
-  const { judul } = req.params;
+  const { title } = req.params;
 
-  const dbRef = fdb.ref('/Artikel');
+  const dbRef = fdb.ref('/Berita');
 
   dbRef
-    .orderByChild('judul')
-    .equalTo(judul)
+    .orderByChild('title')
+    .equalTo(title)
     .once('value')
     .then((snapshot) => {
       res.json(snapshot);
@@ -47,12 +47,12 @@ const getOneByTitle = (req, res) => {
 
 const add = async (req, res) => {
   
-  const { judul, konten, thumbnail, ringkasan } = req.body
-  
+  const { title, description, imageUrl } = req.body
+  const newsUrl = 'https://exless-official.vercel.app/' + title
   try {
-    const newRef = fdb.ref('/Artikel');
-    await newRef.push().set({ thumbnail, judul, konten, ringkasan });
-    res.json('Artikel berhasil dibuat!')
+    const newRef = fdb.ref('/Berita');
+    await newRef.push().set({ imageUrl, title, description, newsUrl });
+    res.json('Berita berhasil dibuat!')
   } catch (err){
     res.json(err)
   }
@@ -62,11 +62,11 @@ const add = async (req, res) => {
 const update = async (req, res) => {
   
   const { id } = req.params
-  const { judul, konten } = req.body
+  const { title, description } = req.body
   
   try {
-    const userRef = fdb.ref(`/Artikel/${id}`);
-    await userRef.update({ judul, konten });
+    const userRef = fdb.ref(`/Berita/${id}`);
+    await userRef.update({ title, description });
     res.json('Data berhasil diperbarui');
   } catch (error) {
     res.status(500).send('Terjadi kesalahan saat memperbarui data');
@@ -79,7 +79,7 @@ const remove = async (req, res) => {
   const { id } = req.params
   
   try {
-    const ref = fdb.ref(`/Artikel/${id}`);
+    const ref = fdb.ref(`/Berita/${id}`);
     await ref.remove();
     res.json('Data berhasil dihapus');
   } catch (error) {

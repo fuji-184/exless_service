@@ -60,8 +60,6 @@ router.get('/video', VideoController.getAll);
 
 router.get('/video/:id', VideoController.getOne);
 
-router.post('/video/', VideoController.add);
-
 router.put('/video/:id', VideoController.update);
 
 router.delete('/video/:id', VideoController.remove);
@@ -74,9 +72,9 @@ router.post('/artikel', ArtikelController.add);
 
 router.put('/artikel/:id', ArtikelController.update);
 
-router.get('/:title', ArtikelController.getOneByTitle);
-
 router.delete('/artikel/:id', ArtikelController.remove);
+
+router.get('/berita/:title', ArtikelController.getOneByTitle);
 
 router.get('/community', CommunityController.getAll);
 

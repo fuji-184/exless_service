@@ -15,9 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
 app.use(router);
 
-const clientId = '477300062240-65gfhg05t4ppgfdgnk90tuvr8tff1hhg.apps.googleusercontent.com';
-const clientSecret = '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';
-const redirectUri = 'https://exless-fujisantoso134.b4a.run/oauth2callback';
+const clientId = '410698574484-kin0sq2iajftc37ivrer23lfos3ff926.apps.googleusercontent.com';
+const clientSecret = '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';
+const redirectUri = 'https://exless-fujisantoso134.b4a.run/callback';
+
+//const redirectUri = 'http://localhost:3000/callback'
 
 const oauth2Client = new OAuth2Client({
   clientId: clientId,
@@ -38,7 +40,7 @@ app.get('/auth/url', (req, res) => {
   res.status(200).json({ url: url });
 });
 
-app.get('/oauth2callback', async (req, res) => {
+app.get('/callback', async (req, res) => {
   const { code } = req.query;
   try {
     const { tokens } = await oauth2Client.getToken(code);
@@ -46,10 +48,10 @@ app.get('/oauth2callback', async (req, res) => {
     refreshToken = tokens.refresh_token;
     oauth2Client.setCredentials(tokens);
     // res.redirect('https://exless-official.vercel.app/add/video');
-    res.status(302).header('Location', 'https://exless-official.vercel.app/add/video').end();
+    res.status(302).header('Location', 'http://localhost:5173/add/video').end();
   } catch (error) {
     // res.redirect('https://exless-official.vercel.app/data/video');
-    res.status(500).header('Location', 'https://exless-official.vercel.app/data/video').end();
+    res.status(500).header('Location', 'http://localhost:5173/data/video').end();
 
   }
 });

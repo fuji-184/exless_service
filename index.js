@@ -48,10 +48,10 @@ app.get('/callback', async (req, res) => {
     refreshToken = tokens.refresh_token;
     oauth2Client.setCredentials(tokens);
     // res.redirect('https://exless-official.vercel.app/add/video');
-    res.status(302).header('Location', 'http://localhost:5173/add/video').end();
+    res.status(302).header('Location', 'https://exless-official.vercel.app/add/video').end();
   } catch (error) {
     // res.redirect('https://exless-official.vercel.app/data/video');
-    res.status(500).header('Location', 'http://localhost:5173/data/video').end();
+    res.status(500).header('Location', 'https://exless-official.vercel.app/data/video').end();
 
   }
 });
